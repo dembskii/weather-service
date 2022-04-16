@@ -1,0 +1,8 @@
+* {
+    font-family: 'Lato', sans-serif;
+}
+
+.weather-bg {
+    background-image: url(https://images.unsplash.com/photo-1525776759712-7b066ce45de0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2069&q=80);
+    height: 100%
+}
