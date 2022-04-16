@@ -1,25 +1,26 @@
 {% include "header.html" %}
 
-<div class="container-fluid weather-bg" >
-    <h1>{{location}}</h1>
-    <p>{{weather}}</p>
-    <p>{{weather}}</p>
-    <p>{{weather}}</p>
-    <p>{{weather}}</p>
-    <p>{{weather}}</p>
-    <p>{{weather}}</p>
-    <p>{{weather}}</p>
-    <p>{{weather}}</p>
-    <p>{{weather}}</p>
-    <p>{{weather}}</p>
-    <p>{{weather}}</p>
-    <p>{{weather}}</p>
-    <p>{{weather}}</p>
-    <p>{{weather}}</p>
-    <p>{{weather}}</p>
-    <p>{{weather}}</p>
-    <p>{{weather}}</p>
-    
+<div class="container-fluid" >
+    <section id="current-weather">
+        <div class="card text-center text-white bg-dark mb-3 " style="width: 60%;">
+            <div class="card-header">
+                weather
+            </div>
+            <div class="card-body">
+                <h1>{{location}}</h1>
+                <h5 class="card-title align-inline"><i class="wi wi-owm-{{weather_current['weather'][0]['id']}} icon-bigger icon-margin"></i>{{weather_current['weather'][0]['description']}}</h5>
+                <hr style="width: 30%;height: 2px; margin: 20px auto 20px auto;color: black;">
+                <h5 class="card-title align-inline">Temp<i class="wi wi-celsius icon-margin"></i>{{weather_current['temp']}}</h5>
+                <h5 class="card-title align-inline">Humidity<i class="wi wi-humidity icon-margin"></i>{{weather_current['humidity']}} %</h5>
+                <h5 class="card-title align-inline">Pressure<i class="wi wi-barometer icon-margin"></i>{{weather_current['pressure']}} hPa</h5>
+                <h5 class="card-title align-inline">Visibility<i class="wi wi-small-craft-advisory icon-margin"></i>{{weather_current['visibility']}} Km</h5>
+                <h5 class="card-title align-inline">Sunrise<i class="wi wi-sunrise icon-margin"></i>{{weather_current['sunrise']}}</h5>
+                <h5 class="card-title align-inline">Sunset<i class="wi wi-sunset icon-margin"></i>{{weather_current['sunset']}}</h5>
+                <h5 class="card-title align-inline">Wind<i class="wi wi-wind from-{{weather_current['wind_deg']}}-deg icon-margin"></i>{{weather_current['wind_deg']}}° {{weather_current['wind_speed']}}Km/h</h5>
+                
+            </div>
+        </div>
+    </section>
 </div>
 
 

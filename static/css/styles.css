@@ -2,7 +2,36 @@
     font-family: 'Lato', sans-serif;
 }
 
-.weather-bg {
-    background-image: url(https://images.unsplash.com/photo-1525776759712-7b066ce45de0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2069&q=80);
-    background-repeat: no-repeat;
+.body {
+    background-color: #252a2e;
+}
+.container-fluid {
+    background-color: #252a2e;
+}
+
+#current-weather {
+    padding-top: 40px;
+    word-wrap:break-word;
+}
+
+.bg-gradient {
+    background-image: var(--bs-gradient)!important;
+}
+
+.card {
+    margin: auto;
+}
+.align-inline {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.icon-bigger {
+    font-size: 2.2em;
+}
+
+.icon-margin {
+    margin: 10px;
 }

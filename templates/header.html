@@ -12,12 +12,20 @@
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100;400;900&display=swap" rel="stylesheet">
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+   
+
+    <!-- Font awesome -->
+    <script src="https://kit.fontawesome.com/3666b16158.js" crossorigin="anonymous"></script>
+
+    <!-- erikflowers weather icons -->
+    <link rel="stylesheet" href="../static/css/weather-icons.css">
+    <link rel="stylesheet" href="../static/css/weather-icons-wind.css">
     <link rel="stylesheet" href="../static/css/styles.css">
 </head>
 <header>
     <nav class="navbar navbar-dark bg-dark">
         <div class="container-fluid">
-          <a class="navbar-brand" href="{{url_for('home')}}">Weather Service</a>
+          <a class="navbar-brand" href="{{url_for('home')}}"><i class="wi wi-night-sleet"></i>  Weather Service</a>
           <form class="d-flex" method="post" action="/weather">
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="location">
             <button class="btn btn-outline-success" type="submit">Search</button>
