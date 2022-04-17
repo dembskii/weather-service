@@ -35,7 +35,7 @@
         </div>
         <div class="table-margin">
             <div class="table-responsive-sm text-center">
-                <table class="table table-dark">
+                <table style="border:2px solid rgba(0,0,0,.125);" class="table table-dark">
                     <thead>
                         <tr >
                             {% for item in weather_hourly %}
@@ -51,7 +51,7 @@
                         </tr>
                       <tr>
                         {% for item in weather_hourly %}
-                        <td>{{item['temp']}}°C</td>
+                        <td style="font-weight:600" >{{item['temp']}}°C</td>
                         {% endfor %}
                           
                     </tr>
