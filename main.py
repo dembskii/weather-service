@@ -1,5 +1,3 @@
-
-from urllib import response
 from flask import Flask,render_template,redirect,url_for,request, flash
 from static import weather_api_endpoint
 from flask_bootstrap import Bootstrap
