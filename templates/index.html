@@ -4,11 +4,24 @@
     <section id="current-weather">
         <div class="card text-center text-white bg-dark mb-3 " style="width: 65%;">
             <div class="card-header">
-                weather
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                {% for message in messages %}
+                    <p style="color: red; margin-bottom: 0;">{{message}}</p>
+                {% endfor%}
+                {% else %}
+                    weather
+                {% endif %}
+                {% endwith %}
+
             </div>
             <div class="card-body">
                 <h1>{{location}}</h1>
-                <h5 class="card-title align-inline"><i class="wi wi-owm-{{weather_current['weather'][0]['id']}} icon-bigger icon-margin"></i>{{weather_current['weather'][0]['description']}}</h5>
+                {% if weather_current['weather'][0]['id'] == 751 %}
+                <h5 class="card-title align-inline"><i class="wi wi-dust icon-bigger icon-margin"></i>{{weather_current['weather'][0]['description']}}</h5>
+                {% else %}
+                    <h5 class="card-title align-inline"><i class="wi wi-owm-{{weather_current['weather'][0]['id']}} icon-bigger icon-margin"></i>{{weather_current['weather'][0]['description']}}</h5>
+                {% endif %}
                 <hr style="width: 30%;height: 2px; margin: 20px auto 20px auto;color: black;">
                 <h5 class="card-title align-inline">Temp<i class="wi wi-celsius icon-margin"></i>{{weather_current['temp']}}</h5>
                 <h5 class="card-title align-inline">Humidity<i class="wi wi-humidity icon-margin"></i>{{weather_current['humidity']}} %</h5>
