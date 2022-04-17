@@ -98,7 +98,7 @@ def weather():
         weather_current = weather[0]
         weather_hourly = weather[1]
     except Exception:
-        flash(f"Our service does not provide in {location}")
+        flash(f"Our service does not provide services in {location}")
         return redirect(url_for("weather"))
 
     
