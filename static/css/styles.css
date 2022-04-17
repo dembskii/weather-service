@@ -1,6 +1,8 @@
 * {
     font-family: 'Lato', sans-serif;
+    color: white;
 }
+
 
 .body {
     background-color: #252a2e;
@@ -14,9 +16,6 @@
     word-wrap:break-word;
 }
 
-.bg-gradient {
-    background-image: var(--bs-gradient)!important;
-}
 
 .card {
     margin: auto;
@@ -35,3 +34,18 @@
 .icon-margin {
     margin: 10px;
 }
+
+.table-margin {
+    margin: 5% 5% 0% 5%;
+}
+
+footer{
+    padding:10px;
+    margin-top: auto;
+    background-color: #212529;
+}
+
+div.space{ 
+	position: relative; 
+	height: 10px;  
+} 

@@ -1,30 +1,12 @@
 
 from urllib import response
 from flask import Flask,render_template,redirect,url_for,request
-from static import current_weather_endpoint
+from static import weather_api_endpoint
 from flask_bootstrap import Bootstrap
 import os
 import requests
 import datetime
 
-
-
-
-weather_symbols = {
-    "Clouds" : '<i style="color: white; padding-top:20px;" class="fa-solid fa-cloud fa-5x"></i>',
-    "Clear" : '<i style="color: orange;" class="fa-solid fa-sun fa-5x"></i>',
-    "Mist" : '<i style="color: blue;" class="fa-solid fa-smog fa-5x"></i>',
-    "Haze" : '<i style="color: blue;" class="fa-solid fa-smog fa-5x"></i>',
-    "Dust" : '<i style="color: blue;" class="fa-solid fa-smog fa-5x"></i>',
-    "Fog" : '<i style="color: blue;" class="fa-solid fa-smog fa-5x"></i>',
-    "Sand" : '<i style="color: blue;" class="fa-solid fa-wind fa-5x"></i>',
-    "Squall" : '<i style="color: blue;" class="fa-solid fa-wind fa-5x"></i>',
-    "Tornado" : '<i style="color: blue;" class="fa-solid fa-tornado fa-5x"></i>',
-    "Snow" : '<i style="color: blue;" class="fa-solid fa-snowflake fa-5x"></i>',
-    "Rain" : '<i style="color: blue;" class="fa-solid fa-cloud-rain fa-5x"></i>',
-    "Drizzle" : '<i style="color: blue;" class="fa-solid fa-cloud-rain fa-5x"></i>',
-    "Thunderstorm" : '<i style="color: blue;" class="fa-solid fa-cloud-bolt fa-5x"></i>'
-}
 
 
 app = Flask(__name__)
@@ -48,23 +30,34 @@ def get_weather(location):
         "units" : "metric"
 
     }
-    response = requests.get("https://api.openweathermap.org/data/2.5/onecall?",params=params)
+    response = requests.get(weather_api_endpoint,params=params)
     data = response.json()
     print(response.url)
+
     current = data['current']
+    # current_time = datetime.datetime.fromtimestamp(current['dt'])
+
+    # timezone = pytz.timezone("Poland/"+location)
+    # aware = timezone.localize(current_time)
+    # aware.tzinfo
+
+
+    print(lat,",",lon)
     current['dt'] = str(datetime.datetime.fromtimestamp(current['dt'])).split(" ")[0]
     current['sunrise'] = str(datetime.datetime.fromtimestamp(current['sunrise'])).split(" ")[1].split(":")[:2]
     current['sunrise'] = ":".join(current['sunrise'])
     current['weather'][0]['description'] = current['weather'][0]['description'].capitalize()
     current['visibility'] = int(current['visibility']/1000)
-   
+    current['wind_speed'] = int(current['wind_speed'])
     
     current['sunset'] = str(datetime.datetime.fromtimestamp(current['sunset'])).split(" ")[1].split(":")[:2]
     current['sunset'] = ":".join(current['sunset'])
     hourly = data['hourly'][:24]
+
     for hour in hourly:
-        date = str(datetime.datetime.fromtimestamp(hour['dt'])).split(" ")[1]
-        
+        date = str(datetime.datetime.fromtimestamp(hour['dt'])).split(" ")[1].split(":")[:2]
+        date = ":".join(date)
+        hour['temp'] = round(hour['temp'])
         hour['dt'] = date
 
     return current,hourly
@@ -84,8 +77,8 @@ def weather():
     weather_current = weather[0]
     weather_hourly = weather[1]
 
-    print(weather_current)
-    return render_template('index.html',location=location,weather_current=weather_current,weather_hourly=weather_hourly,symbols=weather_symbols)
+    print(weather_hourly)
+    return render_template('index.html',location=location,weather_current=weather_current,weather_hourly=weather_hourly)
 
 
 # Run app

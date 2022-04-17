@@ -2,7 +2,7 @@
 
 <div class="container-fluid" >
     <section id="current-weather">
-        <div class="card text-center text-white bg-dark mb-3 " style="width: 60%;">
+        <div class="card text-center text-white bg-dark mb-3 " style="width: 65%;">
             <div class="card-header">
                 weather
             </div>
@@ -16,10 +16,37 @@
                 <h5 class="card-title align-inline">Visibility<i class="wi wi-small-craft-advisory icon-margin"></i>{{weather_current['visibility']}} Km</h5>
                 <h5 class="card-title align-inline">Sunrise<i class="wi wi-sunrise icon-margin"></i>{{weather_current['sunrise']}}</h5>
                 <h5 class="card-title align-inline">Sunset<i class="wi wi-sunset icon-margin"></i>{{weather_current['sunset']}}</h5>
-                <h5 class="card-title align-inline">Wind<i class="wi wi-wind from-{{weather_current['wind_deg']}}-deg icon-margin"></i>{{weather_current['wind_deg']}}° {{weather_current['wind_speed']}}Km/h</h5>
+                <h5 class="card-title align-inline">Wind<i class="wi wi-wind from-{{weather_current['wind_deg']}}-deg icon-margin"></i>{{weather_current['wind_deg']}}° {{weather_current['wind_speed']}} km/h</h5>
                 
             </div>
         </div>
+        <div class="table-margin">
+            <div class="table-responsive-sm text-center">
+                <table class="table table-dark">
+                    <thead>
+                        <tr >
+                            {% for item in weather_hourly %}
+                                <th scope="col">{{item['dt']}}</th>
+                            {% endfor%}
+                        </tr>
+                    </thead>
+                  <tbody>
+                      <tr>
+                          {% for item in weather_hourly %}
+                          <td><i class="wi wi-owm-{{item['weather'][0]['id']}} icon-bigger"></i></td>
+                          {% endfor%}
+                        </tr>
+                      <tr>
+                        {% for item in weather_hourly %}
+                        <td>{{item['temp']}}°C</td>
+                        {% endfor %}
+                          
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+        </div>
+        <div class="space"></div>
     </section>
 </div>
 
