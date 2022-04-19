@@ -1,4 +1,4 @@
-### The Weather Service
+# The Weather Service
 This service provides services almost everywhere, we base on OpenWeatherMap API. The Weather Service delivers current weather information and 24 hours ahead.
 ##
 ### Features
