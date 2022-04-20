@@ -26,3 +26,4 @@ This service provides services almost everywhere, we base on OpenWeatherMap API.
 - Bootstrap
 - OpenWeatherMap API
 - Gunicorn - web server on Heroku
+- Weather Icons by [erikflowers](https://github.com/erikflowers/weather-icons)
