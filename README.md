@@ -17,10 +17,9 @@ This service provides services almost everywhere, we base on OpenWeatherMap API.
 	* symbol
 	* temperature
 - On **smartphones** 24 hours weather bar becomes nice **looking slider**
+- **User is able** to choose between metric and imperial **units**
 
-### Incoming Features
-- **User will be able** to choose beetwin metric and imperial **units**
-
+##
 ### Technologies
 - Python
 - Flask

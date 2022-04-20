@@ -19,6 +19,7 @@
 
 .card {
     margin: auto;
+    width: 65%;
 }
 .align-inline {
     display: flex;
@@ -51,3 +52,15 @@ div.space{
 	height: 10px;  
 } 
 
+@media screen and (max-width:631px) {
+    .card {
+        width: 90%;
+    }
+    
+}
+
+@media screen and (min-width:632px) {
+    .navbar-brand {
+        font-size: 1.5rem;
+    }
+}
