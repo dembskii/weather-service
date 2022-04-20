@@ -13,6 +13,8 @@ app.secret_key = os.environ.get('SECRET_KEY')
 
 # default loc
 default_location = "Gdynia"
+global default_units
+default_units = "metric"
 
 def get_weather(location):
 
@@ -27,7 +29,7 @@ def get_weather(location):
         "lon" : lon,
         "exclude" : ["minutely","daily","alerts"],
         'appid' : os.environ.get("APP_ID"),
-        "units" : "metric"
+        "units" : default_units
 
     }
     response = requests.get(weather_api_endpoint,params=params)
@@ -70,8 +72,16 @@ def get_weather(location):
         elif offset > 0:
             time = time + datetime.timedelta(hours=offset)
         
-        time= str(time).split(" ")[1].split(":")[:2]
-        time = ":".join(time)
+        time= str(time).split(" ")[1].split(":")[:1]
+        time = int(time[0])
+        # time = ":".join(time)
+        
+        
+        if time < 13:
+            time = str(time) +"AM"
+        elif time > 12 :
+            time -= 12
+            time = str(time) + "PM"
         
         hour['temp'] = round(hour['temp'])
         hour['dt'] = time
@@ -102,8 +112,14 @@ def weather():
         return redirect(url_for("weather"))
 
     
-    return render_template('index.html',location=location,weather_current=weather_current,weather_hourly=weather_hourly)
+    return render_template('index.html',location=location,weather_current=weather_current,weather_hourly=weather_hourly,units=default_units)
 
+
+@app.route('/setunits/<units>')
+def set_units(units):
+    global default_units
+    default_units = units
+    return redirect(url_for('weather'))
 
 # Run app
 if __name__ == "__main__":

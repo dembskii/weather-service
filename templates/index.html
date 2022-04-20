@@ -23,18 +23,25 @@
                     <h5 class="card-title align-inline"><i class="wi wi-owm-{{weather_current['weather'][0]['id']}} icon-bigger icon-margin"></i>{{weather_current['weather'][0]['description']}}</h5>
                 {% endif %}
                 <hr style="width: 30%;height: 2px; margin: 20px auto 20px auto;color: black;">
+                {% if units =='metric'%}
                 <h5 class="card-title align-inline">Temp<i class="wi wi-celsius icon-margin"></i>{{weather_current['temp']}}</h5>
+                {% elif units =='imperial'%}
+                <h5 class="card-title align-inline">Temp<i class="wi wi-fahrenheit icon-margin"></i>{{weather_current['temp']}}</h5>
+                {% endif %}
                 <h5 class="card-title align-inline">Humidity<i class="wi wi-humidity icon-margin"></i>{{weather_current['humidity']}} %</h5>
                 <h5 class="card-title align-inline">Pressure<i class="wi wi-barometer icon-margin"></i>{{weather_current['pressure']}} hPa</h5>
                 <h5 class="card-title align-inline">Visibility<i class="wi wi-small-craft-advisory icon-margin"></i>{{weather_current['visibility']}} Km</h5>
                 <h5 class="card-title align-inline">Sunrise<i class="wi wi-sunrise icon-margin"></i>{{weather_current['sunrise']}}</h5>
                 <h5 class="card-title align-inline">Sunset<i class="wi wi-sunset icon-margin"></i>{{weather_current['sunset']}}</h5>
-                <h5 class="card-title align-inline">Wind<i class="wi wi-wind from-{{weather_current['wind_deg']}}-deg icon-margin"></i>{{weather_current['wind_deg']}}° {{weather_current['wind_speed']}} km/h</h5>
-                
+                {% if units =='metric'%}
+                <h5 class="card-title align-inline">Wind<i class="wi wi-wind from-{{weather_current['wind_deg']}}-deg icon-margin"></i>{{weather_current['wind_deg']}}° {{weather_current['wind_speed']}} m/s</h5>
+                {% elif units =='imperial'%}
+                <h5 class="card-title align-inline">Wind<i class="wi wi-wind from-{{weather_current['wind_deg']}}-deg icon-margin"></i>{{weather_current['wind_deg']}}° {{weather_current['wind_speed']}} mph</h5>
+                {% endif %}
             </div>
         </div>
         <div class="table-margin">
-            <div class="table-responsive-sm text-center">
+            <div class="table-responsive text-center">
                 <table style="border:2px solid rgba(0,0,0,.125);" class="table table-dark">
                     <thead>
                         <tr >
@@ -51,7 +58,11 @@
                         </tr>
                       <tr>
                         {% for item in weather_hourly %}
+                        {% if units=='metric' %}
                         <td style="font-weight:600" >{{item['temp']}}°C</td>
+                        {% elif units=='imperial'%}
+                        <td style="font-weight:600" >{{item['temp']}}°F</td>
+                        {% endif %}
                         {% endfor %}
                           
                     </tr>

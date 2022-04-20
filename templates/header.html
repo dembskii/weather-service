@@ -21,12 +21,26 @@
     <link rel="stylesheet" href="../static/css/weather-icons-wind.css">
     <link rel="stylesheet" href="../static/css/styles.css">
 </head>
-<header>
+<header class="header">
     <nav class="navbar navbar-dark bg-dark">
         <div class="container-fluid">
-          <h1>
-            <a class="navbar-brand" href="{{url_for('home')}}"><i class="wi wi-night-sleet"></i>  Weather Service</a>
-          </h1>
+          <div class="align-inline">
+            <h1>
+              <a class="navbar-brand" href="{{url_for('home')}}"><i class="wi wi-night-sleet"></i>  Weather Service</a>
+            </h1>
+            <div style="margin: 5px;" class="btn-group" role="group" aria-label="Units">
+              {% if units =='metric' %}
+              <a style="background-color: #212529!important; border-color: #212529!important;" href="{{url_for('set_units',units='metric')}}" class="btn btn-secondary" type="button">Metric</a>
+              <a href="{{url_for('set_units',units='imperial')}}" class="btn btn-secondary" type="button">Imperial</a>
+              {% else %}
+              <a href="{{url_for('set_units',units='metric')}}" class="btn btn-secondary" type="button">Metric</a>
+              <a style="background-color: #212529!important;border-color: #212529!important;" href="{{url_for('set_units',units='imperial')}}" class="btn btn-secondary" type="button">Imperial</a>
+              {% endif %}
+              
+            </div>
+          </div>
+          
+          
           
           <form class="d-flex" method="post" action="/weather">
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="location">
