@@ -90,11 +90,7 @@ def get_weather(location):
 
 Bootstrap(app)
 
-@app.route('/')
-def home():
-    return redirect(url_for('weather'))
-
-@app.route("/weather",methods=["GET","POST"])
+@app.route('/',methods=["POST","GET"])
 def weather():
     location = default_location
     if request.method == "POST":
@@ -113,6 +109,8 @@ def weather():
 
     
     return render_template('index.html',location=location,weather_current=weather_current,weather_hourly=weather_hourly,units=default_units)
+
+    
 
 
 @app.route('/setunits/<units>')

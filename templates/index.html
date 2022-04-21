@@ -22,7 +22,7 @@
                 {% else %}
                     <h5 class="card-title align-inline"><i class="wi wi-owm-{{weather_current['weather'][0]['id']}} icon-bigger icon-margin"></i>{{weather_current['weather'][0]['description']}}</h5>
                 {% endif %}
-                <hr style="width: 30%;height: 2px; margin: 20px auto 20px auto;color: black;">
+                <hr style="width: 30%;height: 2px; margin: 20px auto 20px auto;color: rgba(0,0,0,.5);">
                 {% if units =='metric'%}
                 <h5 class="card-title align-inline">Temp<i class="wi wi-celsius icon-margin"></i>{{weather_current['temp']}}</h5>
                 {% elif units =='imperial'%}
