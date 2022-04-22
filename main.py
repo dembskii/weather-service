@@ -8,28 +8,29 @@ import pytz
 
 
 
+default_units = "metric"
 app = Flask(__name__)
 app.secret_key = os.environ.get('SECRET_KEY')
 
+Bootstrap(app)
+
 # default loc
 default_location = "Gdynia"
-global default_units
-default_units = "metric"
 
-def get_weather(location):
+def get_weather(location,units):
 
     response = requests.get(url=geocoder_api_endpoint,params={"q":location,"limit":1,"appid": os.environ.get("APP_ID")})
   
     lon = response.json()[0]["lon"]
     lat = response.json()[0]["lat"]
   
-
+    global default_units
     params= {
         "lat" : lat,
         "lon" : lon,
         "exclude" : ["minutely","daily","alerts"],
         'appid' : os.environ.get("APP_ID"),
-        "units" : default_units
+        "units" : units
 
     }
     response = requests.get(weather_api_endpoint,params=params)
@@ -88,36 +89,61 @@ def get_weather(location):
 
     return current,hourly
 
-Bootstrap(app)
 
 @app.route('/',methods=["POST","GET"])
 def weather():
+    global default_units
     location = default_location
     if request.method == "POST":
         location = request.form['location'].capitalize()
         if location == "":
             flash("You have to pass any location")
             return redirect(url_for('weather'))
+        return redirect(url_for('weather_det',location=location,units=default_units))
     try:
 
-        weather = get_weather(location=location)
+        weather = get_weather(location=location,units=default_units)
         weather_current = weather[0]
         weather_hourly = weather[1]
     except Exception:
         flash(f"Our service does not provide services in {location}")
         return redirect(url_for("weather"))
 
+    print(default_units)
+
     
     return render_template('index.html',location=location,weather_current=weather_current,weather_hourly=weather_hourly,units=default_units)
 
+
+@app.route('/<location>/<units>',methods=["POST","GET"])
+def weather_det(location,units):
+    if request.method == "POST":
+        location = request.form['location'].capitalize()
+        if location == "":
+            flash("You have to pass any location")
+            return redirect(url_for('weather'))
+        return redirect(url_for('weather_det',location=location,units=units))
+    try:
+
+        weather = get_weather(location=location,units=units)
+        weather_current = weather[0]
+        weather_hourly = weather[1]
+    except Exception:
+        flash(f"Our service does not provide services in {location}")
+        return redirect(url_for("weather"))
+
+    print(default_units)
+
+    
+    return render_template('index.html',location=location,weather_current=weather_current,weather_hourly=weather_hourly,units=units)
+
     
 
 
-@app.route('/setunits/<units>')
-def set_units(units):
-    global default_units
-    default_units = units
-    return redirect(url_for('weather'))
+@app.route('/setunits/<units>/<location>')
+def set_units(units,location):
+
+    return redirect(url_for('weather_det',location=location,units=units))
 
 # Run app
 if __name__ == "__main__":

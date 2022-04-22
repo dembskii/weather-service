@@ -30,11 +30,11 @@
             </h1>
             <div style="margin: 5px;" class="btn-group" role="group" aria-label="Units">
               {% if units =='metric' %}
-              <a style="background-color: #212529!important; border-color: #212529!important;" href="{{url_for('set_units',units='metric')}}" class="btn btn-secondary" type="button">Metric</a>
-              <a href="{{url_for('set_units',units='imperial')}}" class="btn btn-secondary" type="button">Imperial</a>
+              <a style="background-color: #212529!important; border-color: #212529!important;" href="{{url_for('set_units',units='metric',location=location)}}" class="btn btn-secondary" type="button">Metric</a>
+              <a href="{{url_for('set_units',units='imperial',location=location)}}" class="btn btn-secondary" type="button">Imperial</a>
               {% else %}
-              <a href="{{url_for('set_units',units='metric')}}" class="btn btn-secondary" type="button">Metric</a>
-              <a style="background-color: #212529!important;border-color: #212529!important;" href="{{url_for('set_units',units='imperial')}}" class="btn btn-secondary" type="button">Imperial</a>
+              <a href="{{url_for('set_units',units='metric',location=location)}}" class="btn btn-secondary" type="button">Metric</a>
+              <a style="background-color: #212529!important;border-color: #212529!important;" href="{{url_for('set_units',units='imperial',location=location)}}" class="btn btn-secondary" type="button">Imperial</a>
               {% endif %}
               
             </div>
@@ -42,7 +42,7 @@
           
           
           
-          <form class="d-flex" method="post" action="{{url_for('weather')}}">
+          <form class="d-flex" method="post" action="{{url_for('weather_det',location=location,units=units)}}">
             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="location">
             <button class="btn btn-outline-light" type="submit">Search</button>
           </form>
