@@ -5,7 +5,7 @@ This service provides services almost everywhere, we base on OpenWeatherMap API.
 https://weather-service-ga.herokuapp.com/
 ##
 ### Features
-- **Intractive weather indicator** - it shows direction on compas basing on location
+- **Intractive weather indicator** - it shows wind direction on compas basing on location
 -  **Current weather**
 	- symbol with description
 	- temperature
