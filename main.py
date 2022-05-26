@@ -66,6 +66,7 @@ def get_weather(location,units):
     
     hourly = data['hourly'][:24]
 
+    graph_data = []
     for hour in hourly:
         time = datetime.datetime.fromtimestamp(hour['dt'],utc_timezone)
         if offset < 0:
@@ -86,8 +87,12 @@ def get_weather(location,units):
         
         hour['temp'] = round(hour['temp'])
         hour['dt'] = time
+        
+        graph_data.append((hour['temp'],hour['dt']))
 
-    return current,hourly
+    
+    print(graph_data)
+    return current,hourly,graph_data
 
 
 @app.route('/',methods=["POST","GET"])
@@ -105,6 +110,10 @@ def weather():
         weather = get_weather(location=location,units=default_units)
         weather_current = weather[0]
         weather_hourly = weather[1]
+        graph_data = weather[2]
+        labels = [row[0] for row in graph_data]
+        values = [row[1] for row in graph_data]
+
     except Exception:
         flash(f"Our service does not provide services in {location}")
         return redirect(url_for("weather"))
@@ -112,7 +121,7 @@ def weather():
     print(default_units)
 
     
-    return render_template('index.html',location=location,weather_current=weather_current,weather_hourly=weather_hourly,units=default_units)
+    return render_template('index.html',location=location,weather_current=weather_current,weather_hourly=weather_hourly,units=default_units, labels=labels,values=values)
 
 
 @app.route('/<location>/<units>',methods=["POST","GET"])
@@ -128,6 +137,9 @@ def weather_det(location,units):
         weather = get_weather(location=location,units=units)
         weather_current = weather[0]
         weather_hourly = weather[1]
+        graph_data = weather[2]
+        labels = [row[0] for row in graph_data]
+        values = [row[1] for row in graph_data]
     except Exception:
         flash(f"Our service does not provide services in {location}")
         return redirect(url_for("weather"))
@@ -135,7 +147,7 @@ def weather_det(location,units):
     print(default_units)
 
     
-    return render_template('index.html',location=location,weather_current=weather_current,weather_hourly=weather_hourly,units=units)
+    return render_template('index.html',location=location,weather_current=weather_current,weather_hourly=weather_hourly,units=units,labels=labels,values=values)
 
     
 

@@ -70,7 +70,108 @@
                 </table>
               </div>
         </div>
-        <div class="space"></div>
+        <div class="space"></div> 
+        <script>
+          function delay(time) {
+          return new Promise(resolve => setTimeout(resolve, time));
+        }
+        async function scroll() {
+          var y = document.getElementById("myChart")
+          await delay(100);
+          y.scrollIntoView();
+        }
+
+        function myFunction() {
+          var x = document.getElementById("chartScale");
+          
+          if (x.style.display === "none") {
+            var chart = document.getElementById("myChart")
+            if (window.innerWidth < 662){
+              chart.style.width = "300px";
+              console.log(window.innerWidth)
+              chart.style.height ="200px"
+            } else {
+              chart.style.width = "900px";
+              chart.style.height ="400px"
+            }
+            chart.style.height ="300px";
+            
+            x.style.display = "block";
+            scroll();
+            var button = document.getElementById("btn-graph")
+            button.innerText = "Hide Graph"
+          } else if (x.style.display =="" ){
+            var chart = document.getElementById("myChart")
+            if (window.innerWidth < 662){
+              chart.style.width = "300px";
+              console.log(window.innerWidth)
+              chart.style.height ="200px"
+            } else {
+              chart.style.width = "900px";
+              chart.style.height ="400px"
+            }
+            
+            x.style.display = "block";
+            scroll();
+            var button = document.getElementById("btn-graph")
+            button.innerText = "Hide Graph"
+          }
+          else {
+            x.style.display = "none";
+            var button = document.getElementById("btn-graph")
+            button.innerText = "Show Graph"
+          } 
+          
+        }
+        </script>
+        <div class="container-fluid" style="position: relative; height: 100px;">
+          <div id="btn-graph" class="btn btn-dark" style="margin: 0;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          -ms-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);" onclick="myFunction()">Show Graph</div>
+        </div>
+        
+       
+
+        <div id="chartScale">
+          <canvas id="myChart" width="300" height="100">
+              <script>
+                  const labels = {{ values | safe }} ;
+                
+                  const data = {
+                    labels: labels,
+                    datasets: [{
+                      label: 'Temperature',
+                      backgroundColor: 'rgb(0, 197, 227)',
+                      borderColor: 'rgb(0, 197, 227)',
+                      data: {{ labels | safe }},
+                      tension: 0.2
+                    }]
+                  };
+                
+                  const config = {
+                    type: 'line',
+                    data: data,
+                    options: {
+                      maintainAspectRatio : false,
+                        scales : {
+                            y : {
+                                beginAtZero: false
+                            }
+                        }
+                    }
+                  };
+                </script>
+                <script>
+                  const myChart = new Chart(
+                    document.getElementById('myChart'),
+                    config
+                  );
+                </script>
+          </canvas>
+      </div>
     </section>
 </div>
 

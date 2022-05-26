@@ -21,6 +21,7 @@ https://weather-service-ga.herokuapp.com/
 	* temperature
 - On **smartphones** 24 hours weather bar becomes nice **looking slider**
 - **User is able** to choose between metric and imperial **units**
+- Interactive temperature **graph**
 
 ##
 ### Technologies
@@ -30,3 +31,4 @@ https://weather-service-ga.herokuapp.com/
 - OpenWeatherMap API
 - Gunicorn - web server on Heroku
 - Weather Icons by [erikflowers](https://github.com/erikflowers/weather-icons)
+- ChartsJS
